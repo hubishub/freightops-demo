@@ -91,7 +91,7 @@ export function HeroBoardMock() {
               Demo
             </span>
           </div>
-          <span className="shrink-0 text-[10px] text-fg-subtle">5 sample loads</span>
+          <span className="shrink-0 text-[10px] text-fg-muted">5 sample loads</span>
         </div>
 
         <div className="grid grid-cols-3 gap-2 p-2.5 sm:gap-2.5 sm:p-3">
@@ -143,7 +143,7 @@ export function HeroBoardMock() {
           ))}
         </div>
 
-        <p className="border-t border-border px-3 py-1.5 text-center text-[10px] text-fg-subtle">
+        <p className="border-t border-border px-3 py-1.5 text-center text-[10px] text-fg-muted">
           UI mock · not live TMS data
         </p>
       </div>
