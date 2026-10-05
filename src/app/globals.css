@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Semantic theme tokens — light on :root, dark on html.dark.
+  No html.light !important remaps. Components use bg-surface / text-fg / etc.
+*/
+:root {
+  color-scheme: light;
+  --fg: #0f172a;
+  --fg-muted: #475569;
+  --fg-subtle: #64748b;
+  --surface: #f8fafc;
+  --surface-raised: #ffffff;
+  --surface-sunken: #f1f5f9;
+  --surface-overlay: rgba(248, 250, 252, 0.88);
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --accent: #0369a1; /* sky-700 — AA with white */
+  --accent-muted: #e0f2fe;
+  --accent-fg: #ffffff;
+  --danger: #be123c;
+  --danger-muted: #ffe4e6;
+  --warning: #b45309;
+  --warning-muted: #fffbeb;
+  --warning-fg: #92400e;
+  --background: var(--surface);
+  --foreground: var(--fg);
+  --chart-grid: #cbd5e1;
+  --chart-axis: #64748b;
+  --chart-tooltip-bg: #ffffff;
+  --chart-tooltip-border: #e2e8f0;
+  --scrollbar: #cbd5e1;
+}
+
+html.dark {
+  color-scheme: dark;
+  --fg: #f1f5f9;
+  --fg-muted: #94a3b8;
+  --fg-subtle: #64748b;
+  --surface: #020617;
+  --surface-raised: #0f172a;
+  --surface-sunken: #1e293b;
+  --surface-overlay: rgba(2, 6, 23, 0.88);
+  --border: #1e293b;
+  --border-strong: #334155;
+  --accent: #0284c7; /* sky-600 */
+  --accent-muted: rgba(2, 132, 199, 0.2);
+  --accent-fg: #ffffff;
+  --danger: #fb7185;
+  --danger-muted: rgba(244, 63, 94, 0.2);
+  --warning: #fbbf24;
+  --warning-muted: rgba(245, 158, 11, 0.12);
+  --warning-fg: #fde68a;
+  --background: var(--surface);
+  --foreground: var(--fg);
+  --chart-grid: #334155;
+  --chart-axis: #94a3b8;
+  --chart-tooltip-bg: #0f172a;
+  --chart-tooltip-border: #334155;
+  --scrollbar: #334155;
+}
+
+body {
+  @apply bg-surface text-fg antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar);
+  border-radius: 4px;
+}
+
+/* Docs prose — dual-theme accents (FO-009) */
+.prose-docs h2 {
+  @apply mt-8 mb-3 text-xl font-semibold text-sky-800 dark:text-sky-300;
+}
+.prose-docs h3 {
+  @apply mt-6 mb-2 text-lg font-medium text-fg;
+}
+.prose-docs p {
+  @apply mb-4 text-fg-muted leading-relaxed;
+}
+.prose-docs ul {
+  @apply mb-4 list-disc space-y-1 pl-5 text-fg-muted;
+}
+.prose-docs ol {
+  @apply mb-4 list-decimal space-y-1 pl-5 text-fg-muted;
+}
+.prose-docs code {
+  @apply rounded bg-surface-sunken px-1.5 py-0.5 text-sky-800 text-sm dark:text-sky-300;
+}
+.prose-docs strong {
+  @apply font-semibold text-fg;
+}
+
+/* Recharts legend / tooltip AA (FO-008) */
+.recharts-default-legend .recharts-legend-item-text,
+.recharts-legend-item-text {
+  fill: var(--fg-muted) !important;
+  color: var(--fg-muted) !important;
+}
+.recharts-pie-label-text {
+  fill: var(--fg) !important;
+}
+
+
+/* FO-012: skip to main — visually hidden until keyboard focus */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform 0.15s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+
+/* FO-016: respect prefers-reduced-motion (near-zero anim/transition) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
